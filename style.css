@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --text-color: white;
+    --bg-url: url("./assets/bg-mobile.jpg");
+    --stroke-color: rgba(255,255,255,0.5);
+    --surface-color: rgba(255,255,255,0.1);
+    --surface-color-hover: rgba(255,255,255,0.05);
+    --highlight-color: rgba(255,255,255,0.2);
+    --switch-bg-url: url("./assets/moon-stars.svg");
+}
+
+.light {
+    --text-color: black;
+    --bg-url: url("./assets/bg-mobile-light.jpg");
+    --stroke-color: rgba(0,0,0,0.5);
+    --surface-color: rgba(0,0,0,0.05);
+    --surface-color-hover: rgba(0,0,0,0.02);
+    --highlight-color: rgba(0,0,0,0.1);
+    --switch-bg-url: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMTJDMTAuMjA5MSAxMiAxMiAxMC4yMDkxIDEyIDhDMTIgNS43OTA4NiAxMC4yMDkxIDQgOCA0QzUuNzkwODYgNCA0IDUuNzkwODYgNCA4QzQgMTAuMjA5MSA1Ljc5MDg2IDEyIDggMTJaIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik04IDEuNVY4IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xNC41IDhIOCIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K);
+}
+
+/* Light-mode overrides for components so they stay readable on light backgrounds */
+.light #container {
+    background: rgba(0,0,0,0.04); /* subtle contrast over light bg */
+    border-color: rgba(0,0,0,0.12);
+}
+
+.light #container ul li a {
+    color: #111; /* dark text for buttons */
+    background: rgba(0,0,0,0.06);
+}
+
+.light #social-links a {
+    color: #111;
+}
+
+body {
+    /* background will change automatically when .light is added/removed */
+    background: var(--bg-url) no-repeat top center/cover;
+    transition: 0.3s ease;
+}
+#container {
+    width: 500px;
+    height: 800px;
+    border: 1px solid red;
+    margin: 24px auto;
+    display: flex;
+    flex-direction: column; /* stack profile above options */
+    align-items: center; /* center content horizontally */
+    justify-content: flex-start; /* keep items starting from top */
+    padding-top: 18px; /* space from top of container; adjust to taste */
+    background: rgba(255,255,255,0.05); /* small contrast over bg */
+    box-sizing: border-box;
+}
+/* global font and color */
+body * { 
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+}
+#profile {
+    text-align: center;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+#profile img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover; /* crop if needed to keep aspect */
+    border-radius: 50%; /* make it circular */
+}
+
+#switch {
+    position: relative;
+    width: 64px;
+    margin: 4px auto;
+}
+
+#switch button {
+    width: 32px;
+    height: 32px;
+    background: #ffffff var(--switch-bg-url) no-repeat center;
+    border: 0;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 1;
+    transform: translateY(-50%);
+    animation: slide-out 0.2s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.light #switch button {
+    animation: slide-in 0.2s forwards;
+    background-color: #f0f0f0;
+}
+
+#switch button:hover {
+    outline: 8px solid var(--highlight-color);
+}
+
+#switch span {
+    display: block;
+    width: 64px;
+    height: 24px;
+    background: var(--surface-color);
+    border: 1px solid var(--stroke-color);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 9999px;
+}
+
+@keyframes slide-in {
+    from {
+        left: 0;
+    }
+    to {
+        left: 50%;
+    }
+}
+
+@keyframes slide-out {
+    from {
+        left: 50%;
+    }
+    to {
+        left: 0;
+    }
+}
+
+/* options (lista ao lado do perfil) */
+#container ul {
+    list-style: none;
+    margin: 12px 0 0 0; /* espaço acima da lista quando empilhada */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center; /* centraliza as opções sob o perfil */
+}
+
+#container ul li a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    background: var(--surface-color);
+    color: 1px solid var(--stroke-color);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background .15s; 
+    width: 260px; /* uniform width for all option boxes on desktop */
+    min-height: 48px; /* same minimum height */
+    text-align: center; /* center the link text */
+    box-sizing: border-box;
+    white-space: normal; /* allow text to wrap so full labels show */
+}
+#container ul li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#container ul li a ion-icon {
+    font-size: 20px;
+    --ionicon-stroke-width: 32px;
+}
+
+#container ul li a:hover {
+    background: var(--surface-color-hover);
+    transform: translateY(-2px);
+}
+
+#social-links {
+    display: flex;
+    gap: 16px;
+    padding: 24px 0;
+    font-size: 24px;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+#social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 50%;
+    transition: all .2s;
+    color: #fff;
+}
+
+#social-links a:hover {
+    background: var(--highlight-color);
+    transform: translateY(-2px);
+}
+
+#social-links ion-icon {
+    font-size: 24px;
+}
+
+/* responsive: empilha conteúdo em telas pequenas */
+@media (max-width: 420px) {
+    #container { flex-direction: column; align-items: center; padding-top: 18px; }
+    /* On small screens let buttons size naturally and wrap */
+    #container ul { margin-left: 0; margin-top: 12px; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    #container ul li a { padding: 16px 24px; width: auto; white-space: normal; }
+}
+footer {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-color);
+    padding: 24px 0;
+
+}
